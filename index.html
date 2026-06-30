@@ -2,22 +2,32 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>что тут искать?</title>
+    <title>vDaxis - профиль</title>
 <style>
     body {
         background-color: #1e1f22;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh; 
         margin: 0;
+        padding: 40px 20px;
         font-family: sans-serif;
         -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
     }
 
-    .discord-card {
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        max-width: 1100px;
+        width: 100%;
+    }
+
+    .card {
         background-color: #111214;
-        width: 450px; 
         border-radius: 20px;
         overflow: hidden;
         box-shadow: 0 15px 50px rgba(0,0,0,0.8);
@@ -25,66 +35,34 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .discord-card:hover {
-        transform: scale(1.05);
+    .card:hover {
+        transform: scale(1.03);
         box-shadow: 0 20px 60px rgba(0,0,0,1);
     }
 
-    .discord-banner {
-        height: 140px; 
-        background-color: #141415;
-        position: relative;
-    }
+    .size-discord { width: 100%; max-width: 450px; }
+    .size-minecraft { width: 100%; max-width: 550px; display: flex; align-items: center; }
+    .size-social { width: 100%; max-width: 450px; }
 
-    .discord-avatar-wrapper {
-        position: absolute;
-        top: 70px; 
-        left: 30px;
-        background-color: #111214;
-        padding: 8px;
-        border-radius: 50%;
-    }
+    .discord-banner { height: 140px; background-color: #141415; position: relative; }
+    .discord-avatar-wrapper { position: absolute; top: 70px; left: 30px; background-color: #111214; padding: 8px; border-radius: 50%; }
+    .discord-avatar { width: 120px; height: 120px; border-radius: 50%; display: block; background-color: #2b2d31; transition: transform 0.8s ease-in-out; }
+    .card:hover .discord-avatar { transform: rotate(360deg); }
 
-    .discord-avatar {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        display: block;
-        background-color: #2b2d31;
-        transition: transform 0.8s ease-in-out;
-    }
+    .minecraft-left { flex: 0 0 auto; background-color: #141415; border-right: 1px solid #2b2d31; display: flex; align-items: center; justify-content: center; }
+    .minecraft-skin { width: 230px; height: 327px; display: block; object-fit: cover; }
 
-    .discord-card:hover .discord-avatar {
-        transform: rotate(360deg);
-    }
+    .card-content { padding: 30px; }
+    .discord-content { padding: 70px 30px 30px; } 
 
-    .discord-content {
-        padding: 70px 30px 30px; 
-    }
+    .username { color: #f2f3f5; font-size: 32px; font-weight: 700; margin: 0; }
+    .subtitle { color: #b5bac1; font-size: 18px; margin: 8px 0 25px; cursor: default; }
+    .separator { height: 1px; background-color: #2b2d31; margin-bottom: 25px; }
 
-    .discord-username {
-        color: #f2f3f5;
-        font-size: 32px; 
-        font-weight: 700;
-        margin: 0;
-    }
-
-    .discord-id {
-        color: #b5bac1;
-        font-size: 18px;
-        margin: 8px 0 25px;
-        cursor: default;
-    }
-
-    .discord-separator {
-        height: 1px;
-        background-color: #2b2d31;
-        margin-bottom: 25px;
-    }
-
-    .discord-button {
+    .button-link {
         display: block;
         width: 100%;
+        box-sizing: border-box;
         background-color: #4f545c;
         color: #ffffff;
         text-align: center;
@@ -93,30 +71,78 @@
         text-decoration: none;
         font-size: 18px;
         font-weight: 500;
-        cursor: default;
+        cursor: pointer;
         transition: background-color 0.2s ease;
+        margin-bottom: 10px;
     }
+    .button-link:last-child { margin-bottom: 0; }
+    .button-link:hover { background-color: #5d6269; }
+    .btn-z1 { background-color: #229ED9; }
+    .btn-z1:hover { background-color: #28a8e5; }
+    .btn-z2 { background-color: #24292e; border: 1px solid #444; }
+    .btn-z2:hover { background-color: #2f363d; }
 
-    .discord-card:hover .discord-button {
-        background-color: #5d6269;
+    @media (max-width: 600px) {
+        .size-minecraft {
+            flex-direction: column;
+            width: 100%;
+            max-width: 450px;
+        }
+        .minecraft-left {
+            border-right: none;
+            border-bottom: 1px solid #2b2d31;
+            width: 100%;
+        }
+        .minecraft-skin {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: contain;
+            padding: 20px 0;
+        }
     }
 </style>
 </head>
 <body>
 
-    <div class="discord-card">
-        <div class="discord-banner">
-            <div class="discord-avatar-wrapper">
-                <img src="avatar.png" class="discord-avatar">
+    <div class="cards-container">
+
+        <div class="card size-discord">
+            <div class="discord-banner">
+                <div class="discord-avatar-wrapper">
+                    <img src="avatar.png" class="discord-avatar" alt="Avatar">
+                </div>
+            </div>
+            <div class="card-content discord-content">
+                <h2 class="username">vDaxis</h2>
+                <p class="subtitle">vdaxis</p>
+                <div class="separator"></div>
+                <a href="https://discordapp.com/users/942834215895068693" class="button-link" target="_blank">Посмотреть профиль</a>
             </div>
         </div>
-        
-        <div class="discord-content">
-            <h2 class="discord-username">vDaxis</h2>
-            <p class="discord-id">vDaxis</p>
-            <div class="discord-separator"></div>
-            <div class="discord-button">Manhunt+ 299 RUB/Month</div>
+
+        <div class="card size-social">
+            <div class="card-content">
+                <h2 class="username">Заглушка</h2>
+                <p class="subtitle">Тут что-то будет</p>
+                <div class="separator"></div>
+                <a href="https://vdaxis.ru" class="button-link btn-z1" target="_blank">Кнопка</a>
+                <a href="https://vdaxis.ru" class="button-link btn-z2" target="_blank">Кнопка</a>
+            </div>
         </div>
+
+        <div class="card size-minecraft">
+            <div class="minecraft-left">
+                <img src="skin.png" class="minecraft-skin" alt="Minecraft Skin">
+            </div>
+            <div class="card-content" style="flex: 1;">
+                <h2 class="username">vDaxis</h2>
+                <p class="subtitle">Minecraft Аккаунт</p>
+                <div class="separator"></div>
+                <a href="https://namemc.com/profile/vDaxis" class="button-link" target="_blank">Профиль NameMC</a>
+            </div>
+        </div>
+
     </div>
 
 </body>
